@@ -7,8 +7,8 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable(){
         try{
-            this.getCommand("RandomSpawn").setExecutor(new RandomSpawn());
-            getServer().getPluginManager().registerEvents(new SpawnListener(), this);
+            //this.getCommand("RandomSpawn").setExecutor(new RandomSpawn());
+            getServer().getPluginManager().registerEvents(new ReSpawnListener(), this);
 
         }
         catch(NullPointerException e){

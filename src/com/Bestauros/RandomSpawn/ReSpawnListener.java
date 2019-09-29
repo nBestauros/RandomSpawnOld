@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class SpawnListener implements Listener {
+public class ReSpawnListener implements Listener {
     World world;
     @EventHandler (priority = EventPriority.HIGHEST)
     public void onPlayerRespawn(PlayerRespawnEvent pre){
@@ -36,7 +36,6 @@ public class SpawnListener implements Listener {
         for(World w : worldList){
             if(w.getName().equals("world")){
                 world = w;
-                System.out.println(w.getName());
             }
         }
 
