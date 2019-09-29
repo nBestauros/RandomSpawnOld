@@ -50,8 +50,8 @@ public class NewSpawnListener implements Listener {
             do {
                 //random num up to 1500 times random either -1 or 1
                 //TODO: take a range from config file
-                x = random.nextInt(1500) * (random .nextBoolean() ? -1 : 1);
-                z = random.nextInt(1500) * (random .nextBoolean() ? -1 : 1);
+                x = random.nextInt(300) * (random .nextBoolean() ? -1 : 1);
+                z = random.nextInt(300) * (random .nextBoolean() ? -1 : 1);
                 Biome temp = world.getBiome((int) x, (int) z);
                 for(int i = 0; i <forbiddenBiomeList.size(); i++){
                     if(temp.equals(forbiddenBiomeList.get(i))){
