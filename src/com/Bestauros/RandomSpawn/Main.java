@@ -9,6 +9,7 @@ public class Main extends JavaPlugin {
         try{
             //this.getCommand("RandomSpawn").setExecutor(new RandomSpawn());
             getServer().getPluginManager().registerEvents(new ReSpawnListener(), this);
+            getServer().getPluginManager().registerEvents(new NewSpawnListener(), this);
 
         }
         catch(NullPointerException e){
