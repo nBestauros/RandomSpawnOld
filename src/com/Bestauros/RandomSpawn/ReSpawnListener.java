@@ -67,8 +67,8 @@ public class ReSpawnListener implements Listener {
         do {
             //random num up to 1500 times random either -1 or 1
             //TODO: take a range from config file
-            x = random.nextInt(1500) * (random .nextBoolean() ? -1 : 1);
-            z = random.nextInt(1500) * (random .nextBoolean() ? -1 : 1);
+            x = random.nextInt(750) * (random .nextBoolean() ? -1 : 1);
+            z = random.nextInt(750) * (random .nextBoolean() ? -1 : 1);
             Chunk chunk = new Location(world,x,100,z).getChunk();
             chunk.load(true);
             Biome temp = world.getBiome((int) x, (int) z);
