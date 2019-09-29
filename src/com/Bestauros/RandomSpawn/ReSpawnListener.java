@@ -1,6 +1,7 @@
 package com.Bestauros.RandomSpawn;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Biome;
@@ -68,6 +69,8 @@ public class ReSpawnListener implements Listener {
             //TODO: take a range from config file
             x = random.nextInt(1500) * (random .nextBoolean() ? -1 : 1);
             z = random.nextInt(1500) * (random .nextBoolean() ? -1 : 1);
+            Chunk chunk = new Location(world,x,100,z).getChunk();
+            chunk.load(true);
             Biome temp = world.getBiome((int) x, (int) z);
             for(int i = 0; i <forbiddenBiomeList.size(); i++){
 
