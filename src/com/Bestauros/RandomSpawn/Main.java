@@ -8,6 +8,7 @@ public class Main extends JavaPlugin {
     public void onEnable(){
         try{
             this.getCommand("RandomSpawn").setExecutor(new RandomSpawn());
+            getServer().getPluginManager().registerEvents(new SpawnListener(), this);
 
         }
         catch(NullPointerException e){
