@@ -16,7 +16,7 @@ import java.util.Random;
 
 public class NewSpawnListener implements Listener {
     World world;
-    @EventHandler (priority = EventPriority.HIGHEST)
+    @EventHandler (priority = EventPriority.NORMAL)
     public void onPlayerSpawn(PlayerSpawnLocationEvent sle){
         //checks to see if player has played before
         if(!sle.getPlayer().hasPlayedBefore() && sle.getPlayer().getBedSpawnLocation() == null){
@@ -53,8 +53,11 @@ public class NewSpawnListener implements Listener {
 
         Random random = new Random();
 
+        int limiter = 40; //lets the game try for 40 ticks
+        int counter = 0;
         boolean isForbidden = false;
         do {
+            counter++;
             //random num up to 1500 times random either -1 or 1
             //TODO: take a range from config file
             x = random.nextInt(750) * (random .nextBoolean() ? -1 : 1);
@@ -67,7 +70,7 @@ public class NewSpawnListener implements Listener {
                     isForbidden=true;
                 }
             }
-        }while(isForbidden);
+        }while(isForbidden&&counter<limiter);
         y = world.getHighestBlockYAt((int) x, (int) z);
         sle.setSpawnLocation(new Location(world,x,y,z));
     }

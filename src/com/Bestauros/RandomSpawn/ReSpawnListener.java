@@ -17,7 +17,7 @@ import java.util.Random;
 public class ReSpawnListener implements Listener {
 
     World world;
-    @EventHandler (priority = EventPriority.HIGHEST)
+    @EventHandler (priority = EventPriority.NORMAL)
     public void onPlayerRespawn(PlayerRespawnEvent pre){
         try{
             ArrayList<Biome> forbiddenBiomeList = new ArrayList<Biome>();
@@ -63,8 +63,13 @@ public class ReSpawnListener implements Listener {
 
         Random random = new Random();
 
+
+        int limiter = 40; //lets the game try for 40 ticks
+        int counter = 0;
+
         boolean isForbidden = false;
         do {
+            counter++;
             //random num up to 1500 times random either -1 or 1
             //TODO: take a range from config file
             x = random.nextInt(750) * (random .nextBoolean() ? -1 : 1);
@@ -78,7 +83,7 @@ public class ReSpawnListener implements Listener {
                     isForbidden=true;
                 }
             }
-        }while(isForbidden);
+        }while(isForbidden&&counter<limiter);
         y = world.getHighestBlockYAt((int) x, (int) z);
         pre.setRespawnLocation(new Location(world,x,y,z));
         //Bukkit.broadcastMessage(x+" "+ y+" "+ " "+z);
