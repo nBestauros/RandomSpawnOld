@@ -1,10 +1,9 @@
 package com.Bestauros.RandomSpawn;
 
-import org.bukkit.Bukkit;
-import org.bukkit.Chunk;
-import org.bukkit.Location;
-import org.bukkit.World;
+import net.minecraft.server.v1_14_R1.BlockAir;
+import org.bukkit.*;
 import org.bukkit.block.Biome;
+import org.bukkit.block.Block;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -64,26 +63,30 @@ public class ReSpawnListener implements Listener {
         Random random = new Random();
 
 
-        int limiter = 40; //lets the game try for 40 ticks
-        int counter = 0;
+        //int limiter = 40; //lets the game try for 40 ticks
+        //int counter = 0;
 
-        boolean isForbidden = false;
+        boolean isForbidden = true;
         do {
-            counter++;
+            //counter++;
             //random num up to 1500 times random either -1 or 1
             //TODO: take a range from config file
             x = random.nextInt(750) * (random .nextBoolean() ? -1 : 1);
             z = random.nextInt(750) * (random .nextBoolean() ? -1 : 1);
             Chunk chunk = new Location(world,x,100,z).getChunk();
             chunk.load(true);
-            Biome temp = world.getBiome((int) x, (int) z);
-            for(int i = 0; i <forbiddenBiomeList.size(); i++){
-
-                if(temp.equals(forbiddenBiomeList.get(i))){
-                    isForbidden=true;
-                }
+            //Biome temp = world.getBiome((int) x, (int) z);
+            //for(int i = 0; i <forbiddenBiomeList.size(); i++){
+                //if(temp.equals(forbiddenBiomeList.get(i))){
+                    //isForbidden=true;
+                //}
+            //}
+            Material temp = world.getHighestBlockAt((int) x, (int) z).getType();
+            Material below = world.getBlockAt((int)x,world.getHighestBlockYAt((int) x, (int) z)-1, (int)z).getType();
+            if(temp.equals(Material.AIR)&&!below.equals(Material.WATER)){
+                isForbidden=false;
             }
-        }while(isForbidden&&counter<limiter);
+        }while(isForbidden);
         y = world.getHighestBlockYAt((int) x, (int) z);
         pre.setRespawnLocation(new Location(world,x,y,z));
         //Bukkit.broadcastMessage(x+" "+ y+" "+ " "+z);
