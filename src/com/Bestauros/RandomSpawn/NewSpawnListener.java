@@ -12,6 +12,12 @@ import java.util.List;
 import java.util.Random;
 
 public class NewSpawnListener implements Listener {
+    int xRange;
+    int zRange;
+    public NewSpawnListener(int x, int z){
+        xRange = x;
+        zRange = z;
+    }
     World world;
     @EventHandler (priority = EventPriority.NORMAL)
     public void onPlayerSpawn(PlayerSpawnLocationEvent sle){
@@ -57,8 +63,8 @@ public class NewSpawnListener implements Listener {
             //counter++;
             //random num up to 1500 times random either -1 or 1
             //TODO: take a range from config file
-            x = random.nextInt(750) * (random .nextBoolean() ? -1 : 1);
-            z = random.nextInt(750) * (random .nextBoolean() ? -1 : 1);
+            x = random.nextInt(xRange) * (random .nextBoolean() ? -1 : 1);
+            z = random.nextInt(zRange) * (random .nextBoolean() ? -1 : 1);
             Chunk chunk = new Location(world,x,100,z).getChunk();
             chunk.load(true);
             //Biome temp = world.getBiome((int) x, (int) z);
