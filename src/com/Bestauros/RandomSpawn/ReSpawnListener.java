@@ -16,28 +16,29 @@ import java.util.Random;
 public class ReSpawnListener implements Listener {
     int xRange;
     int zRange;
+    ArrayList<Biome> forbiddenBiomeList;
     public ReSpawnListener(int x, int z){
         xRange = x;
         zRange = z;
+        forbiddenBiomeList = new ArrayList<Biome>();
+        //TODO: Dont hardcode these, add them to the config file
+        forbiddenBiomeList.add(Biome.OCEAN);
+        forbiddenBiomeList.add(Biome.COLD_OCEAN);
+        forbiddenBiomeList.add(Biome.DEEP_COLD_OCEAN);
+        forbiddenBiomeList.add(Biome.DEEP_FROZEN_OCEAN);
+        forbiddenBiomeList.add(Biome.DEEP_LUKEWARM_OCEAN);
+        forbiddenBiomeList.add(Biome.DEEP_OCEAN);
+        forbiddenBiomeList.add(Biome.DEEP_WARM_OCEAN);
+        forbiddenBiomeList.add(Biome.FROZEN_OCEAN);
+        forbiddenBiomeList.add(Biome.LUKEWARM_OCEAN);
+        forbiddenBiomeList.add(Biome.WARM_OCEAN);
     }
 
     World world;
+
     @EventHandler (priority = EventPriority.NORMAL)
     public void onPlayerRespawn(PlayerRespawnEvent pre){
         try{
-            ArrayList<Biome> forbiddenBiomeList = new ArrayList<Biome>();
-            //TODO: Dont hardcode these, add them to the config file
-            forbiddenBiomeList.add(Biome.OCEAN);
-            forbiddenBiomeList.add(Biome.COLD_OCEAN);
-            forbiddenBiomeList.add(Biome.DEEP_COLD_OCEAN);
-            forbiddenBiomeList.add(Biome.DEEP_FROZEN_OCEAN);
-            forbiddenBiomeList.add(Biome.DEEP_LUKEWARM_OCEAN);
-            forbiddenBiomeList.add(Biome.DEEP_OCEAN);
-            forbiddenBiomeList.add(Biome.DEEP_WARM_OCEAN);
-            forbiddenBiomeList.add(Biome.FROZEN_OCEAN);
-            forbiddenBiomeList.add(Biome.LUKEWARM_OCEAN);
-            forbiddenBiomeList.add(Biome.WARM_OCEAN);
-
             List<World> worldList = Bukkit.getWorlds();
             //TODO: take user input for world name
             for(World w : worldList){
